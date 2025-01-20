@@ -1,0 +1,60 @@
+<form class="mt-10" action="" novalidate>
+    <div class="flex flex-col items-center justify-between gap-4 lg:flex-row py-8">
+        <div class="w-24 h-24 bg-white rounded-full">
+            <img src="/bandnest-front/public/photos/piano.jpg" alt="photo-profile">
+        </div>
+        <div class="flex gap-4">
+            <a href="" class="px-4 py-2 border border-2 border-dark uppercase font-first font-bold">Sauvegarder</a>
+            <a href="" class="px-4 py-2 border border-2 border-dark uppercase font-first font-bold">Annuler</a>
+        </div>
+    </div>
+    
+    <div class="grid gap-10">
+        <div class="lg:w-1/2">
+            <label for="structure-name" class="text-dark font-first font-bold uppercase">Nom de la structure</label>
+            <div class="mt-2">
+                <input type="text" id="structure-name" placeholder="" class="w-full px-4 py-2 text-dark font-medium">
+            </div>
+        </div>
+
+        <div class="lg:w-full">
+            <label for="structure-address" class="text-dark font-first font-bold uppercase">Adresse</label>
+            <div class="mt-2">
+                <input type="text" id="structure-address" placeholder="" class="w-full px-4 py-2 text-dark font-medium">
+            </div>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row gap-10">
+            <div class="lg:w-1/3">
+                <label for="city" class="text-dark font-first font-bold uppercase">Ville</label>
+                <div class="mt-2">
+                    <input type="text" id="city" placeholder="" class="w-full px-4 py-2 text-dark font-medium">
+                </div>
+            </div>
+            <div class="lg:w-1/3">
+                <label for="zip" class="text-dark font-first font-bold uppercase">Code postal</label>
+                <div class="mt-2">
+                    <input type="text" id="zip" placeholder="" class="w-full px-4 py-2 text-dark font-medium">
+                </div>
+            </div>
+            <div class="lg:w-1/3">
+                <label for="country" class="text-dark font-first font-bold uppercase">Pays</label>
+                <div class="mt-2">
+                    <select id="country" autocomplete="country" class="w-full px-4 py-2 text-dark font-first uppercase font-medium">
+                        <option>France</option>
+                        <option>Belgique</option>
+                        <option>Espagne</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col lg:flex-row gap-10">
+            <div class="lg:w-full">
+                <label for="description" class="text-dark font-first font-bold uppercase">Description</label>
+                <div class="mt-2">
+                    <textarea type="text" id="description" rows="3" class="w-full px-4 py-2 text-dark font-medium"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
