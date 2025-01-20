@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RoomService } from '../../../services/roomService/room.service';
 import { RoomModel } from '../../../models/room.model';
+import { Pagination } from '../../../models/pagination.model';
 
 @Component({
   selector: 'app-room-card',
@@ -10,11 +11,14 @@ import { RoomModel } from '../../../models/room.model';
   styleUrl: './room-card.component.css'
 })
 export class RoomCardComponent {
-  rooms: RoomModel[] = [];
+  private readonly roomService = inject(RoomService);
 
-  constructor(private roomService: RoomService) {}
+  result = signal<Pagination<RoomModel[]> | null>(null);
+  rooms = computed(()=>this.result()?.data ?? []);
+  currentPage = computed(()=>this.result()?.meta.currentPage);
+  isLoading = computed(()=>this.result() == null);
 
   ngOnInit(): void {
-    this.rooms = this.roomService.getRooms();
+    this.roomService.getRooms().subscribe(result => this.result.set(result));
   }
 }
