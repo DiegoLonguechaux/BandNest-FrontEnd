@@ -21,6 +21,10 @@ export class RoomService {
   constructor() { }
 
   getRooms(): Observable<Pagination<RoomModel[]>> {
-    return this.http.get<Pagination<RoomModel[]>>(this.url);
+    return this.http.get<Pagination<RoomModel[]>>(`${this.url}`);
+  }
+
+  getRoomById(id: number): Observable<RoomModel> {
+    return this.http.get<RoomModel>(`${this.url}/${id}`);
   }
 }
