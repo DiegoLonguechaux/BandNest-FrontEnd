@@ -3,6 +3,7 @@ import { RoomModel } from '../../models/room.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Pagination } from '../../models/pagination.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Pagination } from '../../models/pagination.model';
 export class RoomService {
   private readonly http = inject(HttpClient);
   // private rooms = signal<RoomModel[]>([]);
-  private readonly url = 'http://localhost/api/rooms';
+  private readonly url = `${environment.apiUrl}`;
   
   // private rooms : RoomModel [] = [
   //   { id: 1, name: 'Salle A', address: '2 rue des Tulipes ', surface: 50, price: 20 },
@@ -21,10 +22,10 @@ export class RoomService {
   constructor() { }
 
   getRooms(): Observable<Pagination<RoomModel[]>> {
-    return this.http.get<Pagination<RoomModel[]>>(`${this.url}`);
+    return this.http.get<Pagination<RoomModel[]>>(`${this.url}/rooms`);
   }
 
   getRoomById(id: number): Observable<RoomModel> {
-    return this.http.get<RoomModel>(`${this.url}/${id}`);
+    return this.http.get<RoomModel>(`${this.url}/rooms/${id}`);
   }
 }
