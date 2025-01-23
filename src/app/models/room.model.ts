@@ -2,6 +2,6 @@ export class RoomModel {
     id!: number; 
     name?: string; 
     address: string|undefined; 
-    surface: number|undefined; 
+    size: number|undefined; 
     price : number|undefined;
 }
