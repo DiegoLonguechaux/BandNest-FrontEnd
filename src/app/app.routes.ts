@@ -6,13 +6,14 @@ import { MyAccountComponent } from './components/my-account/my-account.component
 import { RoomPageComponent } from './components/room-page/room-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'rooms-map', component: RoomsMapComponent },
     { path: 'room-page/:id', component: RoomPageComponent },
     { path: 'infos-musicians', component: InfosMusiciansComponent },
-    { path: 'my-account', component: MyAccountComponent },
+    { path: 'my-account', component: MyAccountComponent, canActivate: [authGuard] },
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent},
 ];

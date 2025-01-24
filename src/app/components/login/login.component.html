@@ -5,7 +5,7 @@
                 <p class="uppercase text-4xl text-dark font-first">Connecte toi dès maintenant !</p>
             </div>
         </div>
-        <div class="bg-white p-6 flex flex-col justify-between">
+        <form class="bg-white p-6 flex flex-col justify-between" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
             <div class="flex flex-col gap-5">
                 <div class="flex justify-center items-center mb-6">
                     <a href="login" class="bg-dark border border-dark border-2 font-first font-bold uppercase text-xl text-light px-4 py-2">connexion</a>
@@ -15,7 +15,7 @@
                     <div class="w-full">
                         <label for="email" class="text-dark font-first font-bold uppercase">Email / Nom d'utilisateur</label>
                         <div class="mt-2">
-                            <input type="text" id="email" placeholder="" class="w-full px-4 py-2 text-dark font-medium bg-light">
+                            <input type="text" id="email" placeholder="" class="w-full px-4 py-2 text-dark font-medium bg-light" [(ngModel)]="credentials.email" #email="ngModel">
                         </div>
                     </div>
                     <div class="w-full">
@@ -38,6 +38,6 @@
             <div class="flex justify-center items-center">
                 <button class="px-6 py-3 bg-dark text-light font-first font-bold uppercase">Connexion</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
