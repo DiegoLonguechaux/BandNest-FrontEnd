@@ -15,13 +15,13 @@
                     <div class="w-full">
                         <label for="email" class="text-dark font-first font-bold uppercase">Email / Nom d'utilisateur</label>
                         <div class="mt-2">
-                            <input type="text" id="email" placeholder="" class="w-full px-4 py-2 text-dark font-medium bg-light" [(ngModel)]="credentials.email" #email="ngModel">
+                            <input type="text" id="email" name="email" placeholder="" class="w-full px-4 py-2 text-dark font-medium bg-light" [(ngModel)]="credentials.email" #email="ngModel">
                         </div>
                     </div>
                     <div class="w-full">
                         <label for="password" class="text-dark font-first font-bold uppercase">Mot de passe</label>
                         <div class="mt-2">
-                            <input type="password" id="password" placeholder="" class="w-full px-4 py-2 text-dark font-medium bg-light">
+                            <input type="password" id="password" name="password" placeholder="" class="w-full px-4 py-2 text-dark font-medium bg-light" [(ngModel)]="credentials.password" #password="ngModel">
                         </div>
                         <div class="flex justify-between mt-2">
                             <div class="flex items-center gap-2">
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="flex justify-center items-center">
-                <button class="px-6 py-3 bg-dark text-light font-first font-bold uppercase">Connexion</button>
+                <button tye="submit" class="px-6 py-3 bg-dark text-light font-first font-bold uppercase">Connexion</button>
             </div>
         </form>
     </div>

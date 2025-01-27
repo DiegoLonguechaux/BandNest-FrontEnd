@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, switchMap, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -42,14 +42,45 @@ export class AuthService {
     });
   }
 
+  initializeCsrf(): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/sanctum/csrf-cookie`, {
+      withCredentials: true, // Nécessaire pour inclure les cookies
+    });
+  }
+
   // check auth
+  
   checkAuth(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/auth-check`, {
-      withCredentials: true, // Vérifie l'état d'authentification via le cookie
-    }).pipe(
-      tap(() => {
+    return this.initializeCsrf().pipe(
+      switchMap(() => {
+        return this.http.get(`${environment.apiUrl}/check-auth`, {
+          withCredentials: true, // Inclut les cookies de session
+        });
+      }),
+      tap((response: any) => {
+        console.log('Utilisateur connecté :', response.user);
         this.isLoggedInSubject.next(true);
+      }),
+      catchError((error) => {
+        console.error('Erreur :', error);
+        this.isLoggedInSubject.next(false);
+        return of(false);
       })
     );
   }
+
+  // checkAuth(): Observable<any> {
+  //   return this.http.get(`${environment.apiUrl}/check-auth`, {
+  //     withCredentials: true,  
+  //   }).pipe(
+  //     tap(() => {
+  //       this.isLoggedInSubject.next(true);
+  //     }),
+  //     catchError((error) => {
+  //       console.error('Erreur 401 ou autre :', error); // Log l'erreur pour déboguer
+  //       this.isLoggedInSubject.next(false); // Met à jour l'état local
+  //       return of(null); // Retourne un Observable null en cas d'erreur
+  //     })
+  //   );
+  // }
 }
