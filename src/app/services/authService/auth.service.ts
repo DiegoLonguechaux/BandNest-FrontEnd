@@ -14,73 +14,146 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  // login
-  login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/login`, credentials, {
-      withCredentials: true, // Nécessaire pour envoyer et recevoir des cookies
+  /**
+   * Initialisation CSRF pour Sanctum (évite les erreurs CSRF)
+   */
+  initializeCsrf(): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/sanctum/csrf-cookie`, {
+      withCredentials: true,
     }).pipe(
-      tap(() => {
-        this.isLoggedInSubject.next(true); // Met à jour l'état de connexion
+      tap(() => console.log('CSRF cookie initialisé.')),
+      catchError((error) => {
+        console.error('Erreur lors de l\'initialisation CSRF :', error);
+        return of(null);
       })
     );
   }
 
-  // register
-  register(data: { email: string; password: string; username: string }): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/register`, data, {
-      withCredentials: true, // Pour gérer les cookies
-    });
-  }
-
-  // logout
-  logout(): void {
-    this.http.post(`${environment.apiUrl}/logout`, {}, {
-      withCredentials: true, // Envoie les cookies pour invalider le token côté serveur
-    }).subscribe(() => {
-      this.isLoggedInSubject.next(false); // Met à jour l'état de connexion
-      this.router.navigate(['/login']); // Redirige vers la page de login
-    });
-  }
-
-  initializeCsrf(): Observable<any> {
-    return this.http.get(`${environment.baseUrl}/sanctum/csrf-cookie`, {
-      withCredentials: true, // Nécessaire pour inclure les cookies
-    });
-  }
-
-  // check auth
-  
-  checkAuth(): Observable<any> {
+  /**
+   * Connexion utilisateur
+   */
+   login(credentials: { email: string; password: string }): Observable<any> {
+    // this.initializeCsrf();
     return this.initializeCsrf().pipe(
       switchMap(() => {
-        return this.http.get(`${environment.apiUrl}/check-auth`, {
-          withCredentials: true, // Inclut les cookies de session
-        });
-      }),
-      tap((response: any) => {
-        console.log('Utilisateur connecté :', response.user);
+        // console.log(document.cookie);
+        return this.http.post(`${environment.apiUrl}/login`, credentials, {
+          withCredentials: true,
+          headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+
+        }).pipe(
+          tap((response: any) => {
+            console.log('Connexion réussie.');
+            this.isLoggedInSubject.next(true);
+            // this.currentUserSubject.next(response.user); // Stocker les infos utilisateur
+          }),
+          catchError((error) => {
+            console.error('Erreur lors de la connexion :', error);
+            this.isLoggedInSubject.next(false);
+            // this.currentUserSubject.next(null);
+            return of(null);
+          })
+        );
+      })
+    );
+  }
+
+  // login
+  // login(credentials: { email: string; password: string }): Observable<any> {
+  //   return this.http.post(`${environment.apiUrl}/login`, credentials, {
+  //     headers: { 'Accept': 'application/json' },}).pipe(
+  //     tap((response: any) => {
+  //       if (response.authorisation?.token) {
+  //         localStorage.setItem('auth_token', response.authorisation.token);
+  //         this.isLoggedInSubject.next(true);
+  //       } else {
+  //         console.warn('Aucun token reçu après login.');
+  //       }
+  //     }),
+  //     catchError((error) => {
+  //       this.isLoggedInSubject.next(false);
+  //       return of(null);
+  //     })
+  //   );
+  // }
+
+  // register
+  register(data: { firstname: string; lastname: string; name: string; email: string; password: string; password_confirmation: string; role: string }): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/register`, data, {
+      withCredentials: true,
+    }).pipe(
+      tap(() => console.log('Inscription réussie')),
+      catchError((error) => {
+        console.error('Erreur lors de l\'inscription :', error);
+        return of(null);
+      })
+    );
+  }
+
+  /**
+   * Déconnexion utilisateur
+   */
+  // logout(): void {
+  //   this.http.post(`${environment.apiUrl}/logout`, {}, {
+  //     withCredentials: true,
+  //   }).pipe(
+  //     tap(() => {
+  //       console.log('Déconnexion réussie.');
+  //       this.isLoggedInSubject.next(false);
+  //       this.currentUserSubject.next(null);
+  //       this.router.navigate(['/login']); // Redirige vers la page de connexion
+  //     }),
+  //     catchError((error) => {
+  //       console.error('Erreur lors de la déconnexion :', error);
+  //       return of(null);
+  //     })
+  //   ).subscribe();
+  // }
+  logout(): void {
+    localStorage.removeItem('auth_token'); // Supprime le token
+    this.isLoggedInSubject.next(false);
+    this.router.navigate(['/login']); // Redirige vers la page de connexion
+  }
+
+  /**
+   * Vérifier l'état d'authentification
+   */
+  // checkAuth(): Observable<any> {
+  //   return this.http.get(`${environment.apiUrl}/check-auth`, {
+  //     withCredentials: true, 
+  //   }).pipe(
+  //     tap((response: any) => {
+  //       console.log('Utilisateur connecté :', response.user);
+  //       this.isLoggedInSubject.next(true);
+  //       this.currentUserSubject.next(response.user);
+  //     }),
+  //     catchError((error) => {
+  //       console.error('Non authentifié ou erreur :', error);
+  //       this.isLoggedInSubject.next(false);
+  //       this.currentUserSubject.next(null);
+  //       return of(null);
+  //     })
+  //   );
+  // }
+  checkAuth(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/check-auth`, {
+    }).pipe(
+      tap(() => {
+        console.log('Utilisateur connecté.');
         this.isLoggedInSubject.next(true);
       }),
       catchError((error) => {
-        console.error('Erreur :', error);
+        console.error('Erreur lors de la vérification d\'authentification :', error);
         this.isLoggedInSubject.next(false);
         return of(false);
       })
     );
   }
 
-  // checkAuth(): Observable<any> {
-  //   return this.http.get(`${environment.apiUrl}/check-auth`, {
-  //     withCredentials: true,  
-  //   }).pipe(
-  //     tap(() => {
-  //       this.isLoggedInSubject.next(true);
-  //     }),
-  //     catchError((error) => {
-  //       console.error('Erreur 401 ou autre :', error); // Log l'erreur pour déboguer
-  //       this.isLoggedInSubject.next(false); // Met à jour l'état local
-  //       return of(null); // Retourne un Observable null en cas d'erreur
-  //     })
-  //   );
+  /**
+   * Récupérer les informations de l'utilisateur connecté
+   */
+  // getUser(): Observable<any> {
+  //   return this.currentUserSubject.asObservable();
   // }
 }

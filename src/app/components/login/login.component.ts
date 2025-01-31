@@ -13,22 +13,25 @@ import { FormsModule } from '@angular/forms';
 export class LoginComponent {
   credentials = { email: '', password: '' };
   errorMessage = '';
+  isLoading = false;
 
   constructor(private authService: AuthService, private router: Router){}
 
   onSubmit(form: any): void {
     if (form.valid) {
-      console.log(this.credentials);
+      this.isLoading = true;
+      this.errorMessage = '';
       this.authService.login(this.credentials).subscribe({
-        next: () => {
-          // Redirige l'utilisateur après un login réussi
+        next: (response) => {
           this.router.navigate(['/my-account']);
         },
         error: (err) => {
-          // Affiche un message d'erreur si la connexion échoue
           this.errorMessage = 'Échec de la connexion. Vérifiez vos identifiants.';
-          console.error(err);
+          this.isLoading = false;
         },
+        complete: () => {
+          this.isLoading = false;
+        }
       });
     }
   }

@@ -10,20 +10,10 @@ import { environment } from '../../../environments/environment';
 })
 export class RoomService {
   private readonly http = inject(HttpClient);
-  // private rooms = signal<RoomModel[]>([]);
-  // private readonly url = `${environment.apiUrl}`;
-  // private readonly url = 'http://localhost:5173/api';
   
-  // private rooms : RoomModel [] = [
-  //   { id: 1, name: 'Salle A', address: '2 rue des Tulipes ', surface: 50, price: 20 },
-  //   { id: 2, name: 'Salle B', address: '2 rue des Tulipes ', surface: 20, price: 20 },
-  //   { id: 3, name: 'Salle C', address: '2 rue des Tulipes ', surface: 30, price: 20 },
-  // ];
-
   constructor() { }
 
   getRooms(): Observable<Pagination<RoomModel[]>> {
-    console.log(`${environment.apiUrl}/rooms`);
     return this.http.get<Pagination<RoomModel[]>>(`${environment.apiUrl}/rooms`);
   }
 

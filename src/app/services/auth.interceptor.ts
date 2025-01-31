@@ -1,23 +1,16 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpInterceptorFn, HttpXsrfTokenExtractor } from '@angular/common/http';
+import { inject } from '@angular/core';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const publicUrls = [
-    { url: '/api/rooms', methods: ['GET']},
-    { url: '/api/login', methods: ['POST']},
-    { url: '/api/registetr', methods: ['POST']},
-    { url: '/api/logout', methods: ['POST']},
-   ]
-
-  const isPublicRoute = publicUrls.some(
-    (route) => req.url.includes(route.url) && route.methods.includes(req.method)
-  );  
-
-  if (isPublicRoute) {
-    return next(req);
-  } else {
+  const token = inject( HttpXsrfTokenExtractor).getToken();
+    
     const clonedReq = req.clone({
       withCredentials: true,
+      setHeaders: { 
+        'Accept' : 'application/json', 
+        'X-Requested-With': 'XMLHttpRequest', 
+        'X-XSRF-TOKEN': token ? token : '', 
+      }
     });
     return next(clonedReq);
-  }
 }
