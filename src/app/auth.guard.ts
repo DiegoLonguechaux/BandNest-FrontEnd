@@ -10,7 +10,6 @@ export const authGuard: CanActivateFn = (route, state) => {
   return authService.checkAuth().pipe(
     map((response) => {
       const isAuthenticated = !!response;
-      console.log(`[AuthGuard] Utilisateur authentifié ? ${isAuthenticated}`);
       if (isAuthenticated) {
         return true;
       } else {
@@ -19,7 +18,6 @@ export const authGuard: CanActivateFn = (route, state) => {
       }
     }),
     catchError((error) => {
-      console.error('[AuthGuard] Erreur d\'authentification :', error);
       router.navigate(['/login']);
       return of(false);
     })

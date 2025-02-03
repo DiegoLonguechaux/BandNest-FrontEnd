@@ -21,7 +21,6 @@ export class AuthService {
     return this.http.get(`${environment.baseUrl}/sanctum/csrf-cookie`, {
       withCredentials: true,
     }).pipe(
-      tap(() => console.log('CSRF cookie initialisé.')),
       catchError((error) => {
         console.error('Erreur lors de l\'initialisation CSRF :', error);
         return of(null);
@@ -33,24 +32,19 @@ export class AuthService {
    * Connexion utilisateur
    */
    login(credentials: { email: string; password: string }): Observable<any> {
-    // this.initializeCsrf();
     return this.initializeCsrf().pipe(
       switchMap(() => {
-        // console.log(document.cookie);
         return this.http.post(`${environment.apiUrl}/login`, credentials, {
           withCredentials: true,
           headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
 
         }).pipe(
           tap((response: any) => {
-            console.log('Connexion réussie.');
             this.isLoggedInSubject.next(true);
-            // this.currentUserSubject.next(response.user); // Stocker les infos utilisateur
           }),
           catchError((error) => {
             console.error('Erreur lors de la connexion :', error);
             this.isLoggedInSubject.next(false);
-            // this.currentUserSubject.next(null);
             return of(null);
           })
         );
@@ -82,7 +76,6 @@ export class AuthService {
     return this.http.post(`${environment.apiUrl}/register`, data, {
       withCredentials: true,
     }).pipe(
-      tap(() => console.log('Inscription réussie')),
       catchError((error) => {
         console.error('Erreur lors de l\'inscription :', error);
         return of(null);
@@ -98,7 +91,6 @@ export class AuthService {
   //     withCredentials: true,
   //   }).pipe(
   //     tap(() => {
-  //       console.log('Déconnexion réussie.');
   //       this.isLoggedInSubject.next(false);
   //       this.currentUserSubject.next(null);
   //       this.router.navigate(['/login']); // Redirige vers la page de connexion
@@ -123,7 +115,6 @@ export class AuthService {
   //     withCredentials: true, 
   //   }).pipe(
   //     tap((response: any) => {
-  //       console.log('Utilisateur connecté :', response.user);
   //       this.isLoggedInSubject.next(true);
   //       this.currentUserSubject.next(response.user);
   //     }),
@@ -139,7 +130,6 @@ export class AuthService {
     return this.http.get(`${environment.apiUrl}/check-auth`, {
     }).pipe(
       tap(() => {
-        console.log('Utilisateur connecté.');
         this.isLoggedInSubject.next(true);
       }),
       catchError((error) => {

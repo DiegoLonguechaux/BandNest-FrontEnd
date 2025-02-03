@@ -1,60 +1,73 @@
-<form class="mt-10" action="" novalidate>
-    <div class="flex flex-col items-center justify-between gap-4 lg:flex-row py-8">
-        <div class="w-24 h-24 bg-white rounded-full">
-            <img src="/public/photos/piano.jpg" alt="photo-profile">
-        </div>
-        <div class="flex gap-4">
-            <a href="" class="px-4 py-2 border border-2 border-dark uppercase font-first font-bold">Sauvegarder</a>
-            <a href="" class="px-4 py-2 border border-2 border-dark uppercase font-first font-bold">Annuler</a>
-        </div>
-    </div>
-    
-    <div class="grid gap-10">
-        <div class="flex flex-col lg:flex-row gap-10">
+@if (!isLoading()) {
+    @if (user()) {
+        <form #userForm="ngForm" (ngSubmit)="saveChanges(userForm)" class="mt-10" action="" novalidate>
+            <div class="flex flex-col items-center justify-between gap-4 lg:flex-row py-8">
+                <div class="w-24 h-24 bg-white rounded-full">
+                    <img src="/public/photos/piano.jpg" alt="photo-profile">
+                </div>
+                <div class="flex gap-4">
+                    <button type="submit" class="px-4 py-2 border border-2 border-dark uppercase font-first font-bold"
+                        [disabled]="!isEditing()" *ngIf="isEditing()">Sauvegarder</button>
 
-            <div class="lg:w-1/2">
-                <label for="email" class="text-dark font-first font-bold uppercase">Email</label>
-                <div class="mt-2">
-                    <input type="email" id="email" placeholder="" class="w-full px-4 py-2 text-dark font-medium">
+                    <button type="button" class="px-4 py-2 border border-2 border-dark uppercase font-first font-bold"
+                        (click)="cancelEditing()" *ngIf="isEditing()">Annuler</button>
+
+                    <button type="button" class="px-4 py-2 border border-2 border-dark uppercase font-first font-bold"
+                        (click)="enableEditing()" *ngIf="!isEditing()">Modifier</button>
                 </div>
             </div>
-            
-            <div class="lg:w-1/2">
-                <label for="username" class="text-dark font-first font-bold uppercase">Nom d'utilisateur</label>
-                <div class="mt-2">
-                    <input type="text" id="username" placeholder="" class="w-full px-4 py-2 text-dark font-medium">
+
+            <div class="grid gap-10">
+                <div class="flex flex-col lg:flex-row gap-10">
+                    <!-- {{ user()?.name || '' }} -->
+                    <div class="lg:w-1/2">
+                        <label for="email" class="text-dark font-first font-bold uppercase">Email</label>
+                        <div class="mt-2">
+                            <input type="email" id="email" name="email" placeholder="" class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.email" #email="ngModel" [disabled]="!isEditing()">
+                        </div>
+                    </div>
+
+                    <div class="lg:w-1/2">
+                        <label for="name" class="text-dark font-first font-bold uppercase">Nom d'utilisateur</label>
+                        <div class="mt-2">
+                            <input type="text" id="name" name="name" placeholder="" class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.name" #name="ngModel" [disabled]="!isEditing()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-10">
+                    <div class="lg:w-1/2">
+                        <label for="firstname" class="text-dark font-first font-bold uppercase">Prénom</label>
+                        <div class="mt-2">
+                            <input type="text" name="firstname" id="firstname" placeholder=""
+                                class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.firstname" #firstname="ngModel" [disabled]="!isEditing()">
+                        </div>
+                    </div>
+
+                    <div class="lg:w-1/2">
+                        <label for="lastname" class="text-dark font-first font-bold uppercase">Nom</label>
+                        <div class="mt-2">
+                            <input type="text" name="lastname" id="lastname" placeholder=""
+                                class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.lastname" #lastname="ngModel" [disabled]="!isEditing()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2">
+                    <label for="date_of_birth" class="text-dark font-first font-bold uppercase">Date de naissance</label>
+                    <div class="mt-2">
+                        <input type="date" name="date_of_birth" id="date_of_birth"
+                            class="w-full px-4 py-2 text-dark font-first font-medium" [(ngModel)]="userDatas.date_of_birth" #date_of_birth="ngModel" [disabled]="!isEditing()">
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2">
+                    <label for="password" class="text-dark font-first font-bold uppercase">Mot de passe</label>
+                    <div class="mt-2">
+                        <input type="password" name="password" id="password" class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.password" #password="ngModel" [disabled]="!isEditing()">
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="flex flex-col lg:flex-row gap-10">
-            <div class="lg:w-1/2">
-                <label for="firstname" class="text-dark font-first font-bold uppercase">Prénom</label>
-                <div class="mt-2">
-                    <input type="text" name="firstname" id="firstname" placeholder="" class="w-full px-4 py-2 text-dark font-medium">
-                </div>
-            </div>
-            
-            <div class="lg:w-1/2">
-                <label for="lastname" class="text-dark font-first font-bold uppercase">Nom</label>
-                <div class="mt-2">
-                    <input type="text" name="lastname" id="lastname" placeholder="" class="w-full px-4 py-2 text-dark font-medium">
-                </div>
-            </div>
-        </div>
-        
-        <div class="lg:w-1/2">
-            <label for="birthdate" class="text-dark font-first font-bold uppercase">Date de naissance</label>
-            <div class="mt-2">
-                <input type="date" name="birthdate" id="birthdate" class="w-full px-4 py-2 text-dark font-first font-medium">
-            </div>
-        </div>
-        
-        <div class="lg:w-1/2">
-            <label for="password" class="text-dark font-first font-bold uppercase">Mot de passe</label>
-            <div class="mt-2">
-                <input type="password" name="password" id="password" class="w-full px-4 py-2 text-dark font-medium">
-            </div>
-        </div>
-    </div>
-</form>
+        </form>
+    }
+}
