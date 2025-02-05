@@ -11,11 +11,11 @@ export class UserService {
 
   constructor() { }
 
-  getUser(){
-    return this.http.get<{data:UserModel}>(`${environment.apiUrl}/me`);
+  getUser() {
+    return this.http.get<{ data: UserModel }>(`${environment.apiUrl}/me`);
   }
 
-  updateUser(userData: Partial<UserModel>){
+  updateUser(userData: Partial<UserModel>) {
     return this.http.patch<UserModel>(`${environment.apiUrl}/me/update`, userData);
   }
 }

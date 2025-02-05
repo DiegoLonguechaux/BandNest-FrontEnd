@@ -13,12 +13,20 @@
             <a href="" class="px-4 py-2 border border-2 border-dark uppercase font-first font-bold">Rechercher</a>
         </div>
         <div class="flex items-center">
-            <a href="" class="px-4 py-2 border border-2 border-dark uppercase font-first font-bold">Ajouter une salle</a>
+            <a href="" class="px-4 py-2 border border-2 border-dark uppercase font-first font-bold">Ajouter une
+                salle</a>
         </div>
     </div>
     <div class="flex gap-8">
         <div class="flex flex-col w-1/4 max-h-screen">
-            <app-room-card></app-room-card>
+            @if (!isLoading()) {
+                @for (room of rooms(); track room) {
+                    <app-room-card [room]="room"></app-room-card>
+                }
+            }
+            @else {
+                <span>Chargement des salles...</span>
+            }
         </div>
         <div class="mt-10 w-3/4">
             <img src="photos/piano.jpg" alt="">

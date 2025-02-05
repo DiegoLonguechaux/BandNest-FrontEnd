@@ -7,13 +7,15 @@ import { RoomPageComponent } from './components/room-page/room-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { authGuard } from './auth.guard';
+import { RoomFormComponent } from './components/my-account/room-form/room-form.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'rooms-map', component: RoomsMapComponent },
     { path: 'room-page/:id', component: RoomPageComponent },
+    { path: 'room-form/:id?', component: RoomFormComponent, canActivate: [authGuard] },
     { path: 'infos-musicians', component: InfosMusiciansComponent },
     { path: 'my-account', component: MyAccountComponent, canActivate: [authGuard] },
-    { path: 'login', component: LoginComponent},
-    { path: 'register', component: RegisterComponent},
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
 ];

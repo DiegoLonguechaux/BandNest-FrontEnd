@@ -1,5 +1,10 @@
+<div class="flex flex-col items-center justify-end gap-4 lg:flex-row py-8">
+    <div class="flex gap-4">
+        <a [routerLink]="['/room-form']"
+            class="px-4 py-2 border border-2 border-dark uppercase font-first font-bold">Ajouter une
+            salle</a>
+    </div>
+</div>
 <div class="grid grid-cols-3 gap-4 justify-center">
-    <app-room-card></app-room-card>
-    <app-room-card></app-room-card>
-    <app-room-card></app-room-card>
+    <app-room-card *ngFor="let room of rooms()" [room]="room" [isOwnerView]="true"></app-room-card>
 </div>

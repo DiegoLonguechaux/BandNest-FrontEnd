@@ -31,7 +31,7 @@ export class AuthService {
   /**
    * Connexion utilisateur
    */
-   login(credentials: { email: string; password: string }): Observable<any> {
+  login(credentials: { email: string; password: string }): Observable<any> {
     return this.initializeCsrf().pipe(
       switchMap(() => {
         return this.http.post(`${environment.apiUrl}/login`, credentials, {
@@ -51,25 +51,6 @@ export class AuthService {
       })
     );
   }
-
-  // login
-  // login(credentials: { email: string; password: string }): Observable<any> {
-  //   return this.http.post(`${environment.apiUrl}/login`, credentials, {
-  //     headers: { 'Accept': 'application/json' },}).pipe(
-  //     tap((response: any) => {
-  //       if (response.authorisation?.token) {
-  //         localStorage.setItem('auth_token', response.authorisation.token);
-  //         this.isLoggedInSubject.next(true);
-  //       } else {
-  //         console.warn('Aucun token reçu après login.');
-  //       }
-  //     }),
-  //     catchError((error) => {
-  //       this.isLoggedInSubject.next(false);
-  //       return of(null);
-  //     })
-  //   );
-  // }
 
   // register
   register(data: { firstname: string; lastname: string; name: string; email: string; password: string; password_confirmation: string; role: string }): Observable<any> {
@@ -101,31 +82,13 @@ export class AuthService {
   //     })
   //   ).subscribe();
   // }
-  logout(): void {
-    localStorage.removeItem('auth_token'); // Supprime le token
-    this.isLoggedInSubject.next(false);
-    this.router.navigate(['/login']); // Redirige vers la page de connexion
-  }
 
-  /**
-   * Vérifier l'état d'authentification
-   */
-  // checkAuth(): Observable<any> {
-  //   return this.http.get(`${environment.apiUrl}/check-auth`, {
-  //     withCredentials: true, 
-  //   }).pipe(
-  //     tap((response: any) => {
-  //       this.isLoggedInSubject.next(true);
-  //       this.currentUserSubject.next(response.user);
-  //     }),
-  //     catchError((error) => {
-  //       console.error('Non authentifié ou erreur :', error);
-  //       this.isLoggedInSubject.next(false);
-  //       this.currentUserSubject.next(null);
-  //       return of(null);
-  //     })
-  //   );
+  // logout(): void {
+  //   localStorage.removeItem('auth_token'); // Supprime le token
+  //   this.isLoggedInSubject.next(false);
+  //   this.router.navigate(['/login']); // Redirige vers la page de connexion
   // }
+
   checkAuth(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/check-auth`, {
     }).pipe(
@@ -139,11 +102,4 @@ export class AuthService {
       })
     );
   }
-
-  /**
-   * Récupérer les informations de l'utilisateur connecté
-   */
-  // getUser(): Observable<any> {
-  //   return this.currentUserSubject.asObservable();
-  // }
 }
