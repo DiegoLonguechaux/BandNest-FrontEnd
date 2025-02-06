@@ -5,23 +5,23 @@
                 <p class="uppercase text-4xl text-dark font-first">Connecte toi dès maintenant !</p>
             </div>
         </div>
-        <form class="bg-white p-6 flex flex-col justify-between" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <form class="bg-dark p-6 flex flex-col justify-between" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
             <div class="flex flex-col gap-5">
                 <div class="flex justify-center items-center mb-6">
-                    <a href="login" class="bg-dark border border-dark border-2 font-first font-bold uppercase text-xl text-light px-4 py-2">connexion</a>
-                    <a href="register" class="bg-white border border-dark border-2 font-first font-bold uppercase text-xl text-dark px-4 py-2">inscription</a>
+                    <a href="login" class="bg-primary border border-primary border-2 font-first font-bold uppercase text-xl text-light px-4 py-2">connexion</a>
+                    <a href="register" class="bg-dark border border-primary border-2 font-first font-bold uppercase text-xl text-light px-4 py-2">inscription</a>
                 </div>
                 <div class="flex flex-col justify-center items-center mt-6 gap-10">
                     <div class="w-full">
-                        <label for="email" class="text-dark font-first font-bold uppercase">Email</label>
+                        <label for="email" class="text-light font-first font-bold uppercase">Email</label>
                         <div class="mt-2">
-                            <input type="text" id="email" name="email" placeholder="" class="w-full px-4 py-2 text-dark font-medium bg-light" [(ngModel)]="credentials.email" #email="ngModel">
+                            <input type="text" id="email" name="email" placeholder="" class="w-full px-4 py-2 text-light font-medium bg-dark border border-2 border-primary" [(ngModel)]="credentials.email" #email="ngModel">
                         </div>
                     </div>
                     <div class="w-full">
-                        <label for="password" class="text-dark font-first font-bold uppercase">Mot de passe</label>
+                        <label for="password" class="text-light font-first font-bold uppercase">Mot de passe</label>
                         <div class="mt-2">
-                            <input type="password" id="password" name="password" placeholder="" class="w-full px-4 py-2 text-dark font-medium bg-light" [(ngModel)]="credentials.password" #password="ngModel">
+                            <input type="password" id="password" name="password" placeholder="" class="w-full px-4 py-2 text-light font-medium bg-dark border border-2 border-primary" [(ngModel)]="credentials.password" #password="ngModel">
                         </div>
                         <!-- <div class="flex justify-between mt-2">
                             <div class="flex items-center gap-2">
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="flex justify-center items-center">
-                <button tye="submit" class="px-6 py-3 bg-dark text-light font-first font-bold uppercase">Connexion</button>
+                <button tye="submit" class="px-6 py-3 bg-primary text-light font-first font-bold uppercase">Connexion</button>
             </div>
         </form>
     </div>

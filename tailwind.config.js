@@ -8,7 +8,9 @@ module.exports = {
     extend: {
       colors: {
         dark: '#1D1D1D',
-        light: '#E1E1E1'
+        // light: '#E1E1E1'
+        light: '#F5F4F4',
+        primary: '#1131CE'
       },
       fontFamily: {
         first: ['Archivo Black', 'sans-serif'],

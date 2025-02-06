@@ -17,7 +17,15 @@ export class RoomService {
     return this.http.get<Pagination<RoomModel[]>>(`${environment.apiUrl}/rooms`);
   }
 
-  getRoomById(id: number): Observable<{data: RoomModel}> {
-    return this.http.get<{data: RoomModel}>(`${environment.apiUrl}/rooms/${id}`);
+  getRoomById(roomId: number): Observable<{data: RoomModel}> {
+    return this.http.get<{data: RoomModel}>(`${environment.apiUrl}/rooms/${roomId}`);
+  }
+
+  createRoom(room: RoomModel): Observable<RoomModel> {
+    return this.http.post<RoomModel>(`${environment.apiUrl}/rooms`, room);
+  }
+
+  updateRoom(roomId: number, room: RoomModel): Observable<RoomModel> {
+      return this.http.patch<RoomModel>(`${environment.apiUrl}/rooms/${roomId}`, room);
   }
 }

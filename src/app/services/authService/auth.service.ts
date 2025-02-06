@@ -37,7 +37,6 @@ export class AuthService {
         return this.http.post(`${environment.apiUrl}/login`, credentials, {
           withCredentials: true,
           headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
-
         }).pipe(
           tap((response: any) => {
             this.isLoggedInSubject.next(true);
@@ -53,15 +52,23 @@ export class AuthService {
   }
 
   // register
-  register(data: { firstname: string; lastname: string; name: string; email: string; password: string; password_confirmation: string; role: string }): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/register`, data, {
-      withCredentials: true,
-    }).pipe(
-      catchError((error) => {
-        console.error('Erreur lors de l\'inscription :', error);
-        return of(null);
+  register(credentials: { firstname: string; lastname: string; name: string; email: string; password: string; password_confirmation: string; role: string }): Observable<any> {
+    return this.initializeCsrf().pipe(
+      switchMap(() => {
+        return this.http.post(`${environment.apiUrl}/register`, credentials, {
+          withCredentials: true,
+          headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+        }).pipe(
+          tap((response: any) => {
+            this.isLoggedInSubject.next(true);
+          }),
+          catchError((error) => {
+            console.error('Erreur lors de l\'inscription :', error);
+            return of(null);
+          })
+        );
       })
-    );
+    )
   }
 
   /**

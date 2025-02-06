@@ -52,12 +52,8 @@
             <div class="lg:w-1/3">
                 <label for="country" class="text-dark font-first font-bold uppercase">Pays</label>
                 <div class="mt-2">
-                    <select id="country" autocomplete="country"
-                        class="w-full px-4 py-2 text-dark font-first uppercase font-medium">
-                        <option>France</option>
-                        <option>Belgique</option>
-                        <option>Espagne</option>
-                    </select>
+                    <input type="text" id="country" name="country" class="w-full px-4 py-2 text-dark font-medium"
+                        [(ngModel)]="structureDatas.country" #country="ngModel" [disabled]="!isEditing()">
                 </div>
             </div>
         </div>

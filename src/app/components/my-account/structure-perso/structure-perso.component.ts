@@ -23,7 +23,7 @@ export class StructurePersoComponent {
     address: '',
     city: '',
     zip_code: '',
-    // country_id: '',
+    country: '',
     // owner_id: '',
   };
 

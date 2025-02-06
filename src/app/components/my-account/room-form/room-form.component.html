@@ -1,1 +1,60 @@
-<p>room-form works!</p>
+<div class="min-h-screen px-20 py-10">
+    <h1 class="text-dark font-first font-bold uppercase text-4xl">
+        @if (isEditing()) { Modifier la salle } @else { Ajouter une salle }
+    </h1>
+
+    <form #roomForm="ngForm" (ngSubmit)="submitForm(roomForm)" class="mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="name" class="text-dark font-bold uppercase">Nom de la salle</label>
+                <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-dark"
+                    [(ngModel)]="roomDatas.name" #name="ngModel">
+            </div>
+            <div>
+                <label class="text-dark font-bold uppercase">Adresse</label>
+                <input type="text" name="address" class="w-full px-4 py-2 border border-dark"
+                    [(ngModel)]="roomDatas.address">
+            </div>
+            <div>
+                <label class="text-dark font-bold uppercase">Code postal</label>
+                <input type="text" name="zip_code" class="w-full px-4 py-2 border border-dark"
+                    [(ngModel)]="roomDatas.zip_code">
+            </div>
+            <div>
+                <label class="text-dark font-bold uppercase">Ville</label>
+                <input type="text" name="city" class="w-full px-4 py-2 border border-dark"
+                    [(ngModel)]="roomDatas.city">
+            </div>
+            <div>
+                <label class="text-dark font-bold uppercase">Pays</label>
+                <input type="text" name="country" class="w-full px-4 py-2 border border-dark"
+                    [(ngModel)]="roomDatas.country">
+            </div>
+            <div>
+                <label class="text-dark font-bold uppercase">Surface (m²)</label>
+                <input type="number" name="size" class="w-full px-4 py-2 border border-dark"
+                    [(ngModel)]="roomDatas.size">
+            </div>
+            <div>
+                <label class="text-dark font-bold uppercase">Prix (€ / H)</label>
+                <input type="number" name="price" class="w-full px-4 py-2 border border-dark"
+                    [(ngModel)]="roomDatas.price_per_hour">
+            </div>
+            <div>
+                <label class="text-dark font-bold uppercase">Description</label>
+                <textarea type="text" id="description" name="description" class="w-full px-4 py-2 border border-dark"
+                    [(ngModel)]="roomDatas.description"></textarea>
+            </div>
+        </div>
+
+        <div class="flex justify-end gap-4 mt-6">
+            <button type="submit" class="px-6 py-2 bg-dark text-white uppercase font-bold">
+                @if (isEditing()) { Modifier } @else { Ajouter }
+            </button>
+            <button type="button" class="px-6 py-2 border border-dark uppercase font-bold"
+                >
+                Annuler
+            </button>
+        </div>
+    </form>
+</div>

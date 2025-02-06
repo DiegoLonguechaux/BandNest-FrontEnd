@@ -7,7 +7,7 @@ export class StructureModel {
     address?: string;
     city?: string;
     zip_code?: string;
-    country_id?: number;
+    country?: string;
     owner_id?: number;
     rooms?: RoomModel[];
 }
