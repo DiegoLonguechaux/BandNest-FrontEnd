@@ -21,14 +21,14 @@
                 <div class="flex flex-col lg:flex-row gap-10">
                     <!-- {{ user()?.name || '' }} -->
                     <div class="lg:w-1/2">
-                        <label for="email" class="text-dark font-first font-bold uppercase">Email</label>
+                        <label for="email" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Email</label>
                         <div class="mt-2">
                             <input type="email" id="email" name="email" placeholder="" class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.email" #email="ngModel" [disabled]="!isEditing()">
                         </div>
                     </div>
 
                     <div class="lg:w-1/2">
-                        <label for="name" class="text-dark font-first font-bold uppercase">Nom d'utilisateur</label>
+                        <label for="name" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Nom d'utilisateur</label>
                         <div class="mt-2">
                             <input type="text" id="name" name="name" placeholder="" class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.name" #name="ngModel" [disabled]="!isEditing()">
                         </div>
@@ -37,7 +37,7 @@
 
                 <div class="flex flex-col lg:flex-row gap-10">
                     <div class="lg:w-1/2">
-                        <label for="firstname" class="text-dark font-first font-bold uppercase">Prénom</label>
+                        <label for="firstname" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Prénom</label>
                         <div class="mt-2">
                             <input type="text" name="firstname" id="firstname" placeholder=""
                                 class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.firstname" #firstname="ngModel" [disabled]="!isEditing()">
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="lg:w-1/2">
-                        <label for="lastname" class="text-dark font-first font-bold uppercase">Nom</label>
+                        <label for="lastname" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Nom</label>
                         <div class="mt-2">
                             <input type="text" name="lastname" id="lastname" placeholder=""
                                 class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.lastname" #lastname="ngModel" [disabled]="!isEditing()">
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="lg:w-1/2">
-                    <label for="date_of_birth" class="text-dark font-first font-bold uppercase">Date de naissance</label>
+                    <label for="date_of_birth" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Date de naissance</label>
                     <div class="mt-2">
                         <input type="date" name="date_of_birth" id="date_of_birth"
                             class="w-full px-4 py-2 text-dark font-first font-medium" [(ngModel)]="userDatas.date_of_birth" #date_of_birth="ngModel" [disabled]="!isEditing()">
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="lg:w-1/2">
-                    <label for="password" class="text-dark font-first font-bold uppercase">Mot de passe</label>
+                    <label for="password" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Mot de passe</label>
                     <div class="mt-2">
                         <input type="password" name="password" id="password" class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.password" #password="ngModel" [disabled]="!isEditing()">
                     </div>
