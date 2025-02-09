@@ -47,6 +47,32 @@
             </div>
         </div>
 
+        <div class="mt-6">
+            <h2 class="text-dark font-bold uppercase text-lg">Horaires d'ouverture</h2>
+        
+            <div *ngFor="let hour of roomDatas.operating_hours; let i = index" class="flex items-center gap-4 mt-2">
+                <label class="text-dark font-medium w-24">{{ hour.day | titlecase }}</label>
+        
+                <!-- Case à cocher "Fermé" -->
+                <label class="flex items-center gap-2">
+                    <input type="checkbox" [(ngModel)]="hour.closed" (change)="toggleClosed(i)" 
+                           name="closed{{i}}" [ngModelOptions]="{standalone: true}">
+                    <span>Fermé</span>
+                </label>
+        
+                <!-- Champs horaires (désactivés si "Fermé" est coché) -->
+                <input type="time" [(ngModel)]="hour.start" name="start{{i}}" 
+                       class="px-4 py-2 border border-dark"
+                       [disabled]="hour.closed" [ngModelOptions]="{standalone: true}">
+        
+                <span>à</span>
+        
+                <input type="time" [(ngModel)]="hour.end" name="end{{i}}" 
+                       class="px-4 py-2 border border-dark"
+                       [disabled]="hour.closed" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+
         <div class="flex justify-end gap-4 mt-6">
             <button type="submit" class="px-6 py-2 bg-dark text-white uppercase font-bold">
                 @if (isEditing()) { Modifier } @else { Ajouter }
