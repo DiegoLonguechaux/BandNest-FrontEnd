@@ -2,11 +2,12 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { RoomService } from '../../services/roomService/room.service';
 import { RoomModel } from '../../models/room.model';
 import { ActivatedRoute } from '@angular/router';
+import { CalendarComponent } from '../shared/calendar/calendar.component';
 
 @Component({
   selector: 'app-room-page',
   standalone: true,
-  imports: [],
+  imports: [CalendarComponent],
   templateUrl: './room-page.component.html',
   styleUrl: './room-page.component.css'
 })

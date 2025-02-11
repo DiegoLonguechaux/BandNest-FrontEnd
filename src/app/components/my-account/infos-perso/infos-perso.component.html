@@ -23,14 +23,14 @@
                     <div class="lg:w-1/2">
                         <label for="email" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Email</label>
                         <div class="mt-2">
-                            <input type="email" id="email" name="email" placeholder="" class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.email" #email="ngModel" [disabled]="!isEditing()">
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 text-dark font-medium border border-2 border-dark" [(ngModel)]="userDatas.email" #email="ngModel" [disabled]="!isEditing()">
                         </div>
                     </div>
 
                     <div class="lg:w-1/2">
                         <label for="name" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Nom d'utilisateur</label>
                         <div class="mt-2">
-                            <input type="text" id="name" name="name" placeholder="" class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.name" #name="ngModel" [disabled]="!isEditing()">
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 text-dark font-medium border border-2 border-dark" [(ngModel)]="userDatas.name" #name="ngModel" [disabled]="!isEditing()">
                         </div>
                     </div>
                 </div>
@@ -39,16 +39,16 @@
                     <div class="lg:w-1/2">
                         <label for="firstname" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Prénom</label>
                         <div class="mt-2">
-                            <input type="text" name="firstname" id="firstname" placeholder=""
-                                class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.firstname" #firstname="ngModel" [disabled]="!isEditing()">
+                            <input type="text" name="firstname" id="firstname"
+                                class="w-full px-4 py-2 text-dark font-medium border border-2 border-dark" [(ngModel)]="userDatas.firstname" #firstname="ngModel" [disabled]="!isEditing()">
                         </div>
                     </div>
 
                     <div class="lg:w-1/2">
                         <label for="lastname" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Nom</label>
                         <div class="mt-2">
-                            <input type="text" name="lastname" id="lastname" placeholder=""
-                                class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.lastname" #lastname="ngModel" [disabled]="!isEditing()">
+                            <input type="text" name="lastname" id="lastname"
+                                class="w-full px-4 py-2 text-dark font-medium border border-2 border-dark" [(ngModel)]="userDatas.lastname" #lastname="ngModel" [disabled]="!isEditing()">
                         </div>
                     </div>
                 </div>
@@ -57,14 +57,14 @@
                     <label for="date_of_birth" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Date de naissance</label>
                     <div class="mt-2">
                         <input type="date" name="date_of_birth" id="date_of_birth"
-                            class="w-full px-4 py-2 text-dark font-first font-medium" [(ngModel)]="userDatas.date_of_birth" #date_of_birth="ngModel" [disabled]="!isEditing()">
+                            class="w-full px-4 py-2 text-dark font-first font-medium border border-2 border-dark" [(ngModel)]="userDatas.date_of_birth" #date_of_birth="ngModel" [disabled]="!isEditing()">
                     </div>
                 </div>
 
                 <div class="lg:w-1/2">
                     <label for="password" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Mot de passe</label>
                     <div class="mt-2">
-                        <input type="password" name="password" id="password" class="w-full px-4 py-2 text-dark font-medium" [(ngModel)]="userDatas.password" #password="ngModel" [disabled]="!isEditing()">
+                        <input type="password" name="password" id="password" class="w-full px-4 py-2 text-dark font-medium border border-2 border-dark" [(ngModel)]="userDatas.password" #password="ngModel" [disabled]="!isEditing()">
                     </div>
                 </div>
             </div>

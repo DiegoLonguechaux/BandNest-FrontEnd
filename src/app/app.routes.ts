@@ -11,8 +11,8 @@ import { RoomFormComponent } from './components/my-account/room-form/room-form.c
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'rooms-map', component: RoomsMapComponent },
-    { path: 'room-page/:id', component: RoomPageComponent },
+    { path: 'plan-salles', component: RoomsMapComponent },
+    { path: 'salle-de-repetition/:id', component: RoomPageComponent },
     { path: 'room-form/:id', component: RoomFormComponent, canActivate: [authGuard] },
     { path: 'room-form', component: RoomFormComponent, canActivate: [authGuard] },
     { path: 'infos-musicians', component: InfosMusiciansComponent },

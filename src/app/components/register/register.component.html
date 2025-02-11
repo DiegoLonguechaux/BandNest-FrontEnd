@@ -1,53 +1,53 @@
-<div class="h-[calc(100vh-72px)] px-20 py-10">
-    <div class="grid grid-cols-2 h-full">
-        <div class="flex items-end">
-            <div class="flex items-end mb-10 me-10">
-                <p class="uppercase text-4xl text-dark font-first">Pas encore inscris ? <br> <span class="text-primary">Fais le dès maintenant !</span></p>
+<div class="h-[calc(100vh-72px)]">
+    <div class="grid grid-cols-1 md:grid-cols-2 h-full">
+        <div class="flex items-end bg-dark px-20 py-10">
+            <div class="flex items-end mb-20">
+                <p class="uppercase text-4xl text-light font-first">Pas encore inscris ? <br> <span class="text-primary">Fais le dès maintenant !</span></p>
             </div>
         </div>
-        <form class="bg-white p-6 flex flex-col justify-between" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+        <form class="bg-light px-20 py-10 flex flex-col justify-between" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
             <div class="flex flex-col gap-5">
                 <div class="flex justify-center items-center mb-6">
-                    <a href="login" class="bg-white border border-dark border-2 font-first font-bold uppercase text-xl text-dark px-4 py-2">connexion</a>
+                    <a href="login" class="bg-light border border-dark border-2 font-first font-bold uppercase text-xl text-dark px-4 py-2">connexion</a>
                     <a href="register" class="bg-dark border border-dark border-2 font-first font-bold uppercase text-xl text-light px-4 py-2">inscription</a>
                 </div>
                 <div class="flex flex-col justify-center items-center mt-6 gap-6">
                     <div class="flex w-full gap-4">
                         <div class="w-full">
-                            <label for="firstname" class="text-dark font-first font-bold uppercase">Prénom</label>
+                            <label for="firstname" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Prénom</label>
                             <div class="mt-2">
-                                <input type="text" id="firstname" name="firstname" class="w-full px-4 py-2 text-dark font-medium bg-light"  [(ngModel)]="credentials.firstname" #firstname="ngModel">
+                                <input type="text" id="firstname" name="firstname" class="w-full px-4 py-2 text-dark font-medium bg-light border border-2 border-dark" [(ngModel)]="credentials.firstname" #firstname="ngModel">
                             </div>
                         </div>
                         <div class="w-full">
-                            <label for="lastname" class="text-dark font-first font-bold uppercase">Nom</label>
+                            <label for="lastname" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Nom</label>
                             <div class="mt-2">
-                                <input type="text" id="lastname" name="lastname" class="w-full px-4 py-2 text-dark font-medium bg-light"[(ngModel)]="credentials.lastname" #lastname="ngModel">
+                                <input type="text" id="lastname" name="lastname" class="w-full px-4 py-2 text-dark font-medium bg-light border border-2 border-dark" [(ngModel)]="credentials.lastname" #lastname="ngModel">
                             </div>
                         </div>
                     </div>
                     <div class="w-full">
-                        <label for="name" class="text-dark font-first font-bold uppercase">Nom d'utilisateur</label>
+                        <label for="name" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Nom d'utilisateur</label>
                         <div class="mt-2">
-                            <input type="text" id="name" name="name" class="w-full px-4 py-2 text-dark font-medium bg-light" [(ngModel)]="credentials.name" #name="ngModel">
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 text-dark font-medium bg-light border border-2 border-dark" [(ngModel)]="credentials.name" #name="ngModel">
                         </div>
                     </div>
                     <div class="w-full">
-                        <label for="email" class="text-dark font-first font-bold uppercase">Email</label>
+                        <label for="email" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Email</label>
                         <div class="mt-2">
-                            <input type="email" id="email" name="email" class="w-full px-4 py-2 text-dark font-medium bg-light" [(ngModel)]="credentials.email" #email="ngModel">
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 text-dark font-medium bg-light border border-2 border-dark" [(ngModel)]="credentials.email" #email="ngModel">
                         </div>
                     </div>
                     <div class="w-full">
-                        <label for="password" class="text-dark font-first font-bold uppercase">Mot de passe</label>
+                        <label for="password" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Mot de passe</label>
                         <div class="mt-2">
-                            <input type="password" id="password" name="password" class="w-full px-4 py-2 text-dark font-medium bg-light" [(ngModel)]="credentials.password" #password="ngModel">
+                            <input type="password" id="password" name="password" class="w-full px-4 py-2 text-dark font-medium bg-light border border-2 border-dark" [(ngModel)]="credentials.password" #password="ngModel">
                         </div>
                     </div>
                     <div class="w-full">
-                        <label for="confirm-password" class="text-dark font-first font-bold uppercase">Confirmation du mot de passe</label>
+                        <label for="confirm-password" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Confirmation du mot de passe</label>
                         <div class="mt-2">
-                            <input type="password" id="confirm-password" name="password_confirmation" class="w-full px-4 py-2 text-dark font-medium bg-light" [(ngModel)]="credentials.password_confirmation" #password_confirmation="ngModel">
+                            <input type="password" id="confirm-password" name="password_confirmation" class="w-full px-4 py-2 text-dark font-medium bg-light border border-2 border-dark" [(ngModel)]="credentials.password_confirmation" #password_confirmation="ngModel">
                         </div>
                     </div>
                     <div class="w-full flex items-center gap-2">
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="flex justify-center items-center">
-                <button class="px-6 py-3 bg-dark text-light font-first font-bold uppercase">Connexion</button>
+                <button class="px-6 py-3 bg-dark text-light font-first font-bold uppercase">Je m'inscris</button>
             </div>
         </form>
     </div>
