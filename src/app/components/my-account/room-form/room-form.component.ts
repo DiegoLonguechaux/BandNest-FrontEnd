@@ -4,6 +4,7 @@ import { RoomService } from '../../../services/roomService/room.service';
 import { OperatingHours, RoomModel } from '../../../models/room.model';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MaterialModel } from '../../../models/material.model';
 
 @Component({
   selector: 'app-room-form',
@@ -20,8 +21,9 @@ export class RoomFormComponent {
 
   roomId: number | null = null;
   isEditing = signal(false);
+  newMaterial: string = '';
   private readonly weekDays: OperatingHours['day'][] = [
-    'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'
+    'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'
   ];
 
   roomDatas: RoomModel = {
@@ -30,6 +32,7 @@ export class RoomFormComponent {
     address: '',
     size: 0,
     price_per_hour: 0,
+    material: [],
     operating_hours: this.weekDays.map(day => ({
       day,
       start: null, // Par défaut, pas d'horaires
@@ -49,6 +52,10 @@ export class RoomFormComponent {
           this.roomDatas = { ...response.data };
         });
 
+        if (!this.roomDatas.material) {
+          this.roomDatas.material = [];
+        }
+
         if (!this.roomDatas.operating_hours || this.roomDatas.operating_hours.length === 0) {
           this.roomDatas.operating_hours = this.weekDays.map(day => ({
             day,
@@ -59,6 +66,19 @@ export class RoomFormComponent {
         }
       }
     });
+  }
+
+  addMaterial() {
+    if (this.newMaterial.trim()) {
+      const newMat: MaterialModel = { name: this.newMaterial.trim() }; // Créer un objet MaterialModel
+      this.roomDatas.material.push(newMat); // Ajouter l'objet au tableau
+      this.newMaterial = ''; // Réinitialise l'input
+    }
+  }
+  
+
+  removeMaterial(index: number) {
+    this.roomDatas.material.splice(index, 1);
   }
 
   toggleClosed(index: number): void {

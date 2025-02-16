@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/authService/auth.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -14,6 +15,7 @@ export class LoginComponent {
   credentials = { email: '', password: '' };
   errorMessage = '';
   isLoading = false;
+  isPasswordVisible : boolean = false;
 
   constructor(private authService: AuthService, private router: Router){}
 
@@ -34,5 +36,9 @@ export class LoginComponent {
         }
       });
     }
+  }
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 }

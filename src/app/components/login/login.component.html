@@ -1,7 +1,8 @@
 <div class="h-[calc(100vh-72px)]">
     <div class="grid grid-cols-1 md:grid-cols-2 h-full">
         <div class="flex items-end bg-dark px-20 py-10">
-            <div class="flex items-end mb-20">
+            <div class="flex flex-col mb-20">
+                <img src="stickers/yo.png" alt="">
                 <p class="uppercase text-4xl text-light font-first">Connecte toi <br> <span class="text-primary">dès maintenant !</span></p>
             </div>
         </div>
@@ -18,10 +19,21 @@
                             <input type="text" id="email" name="email" placeholder="" class="w-full px-4 py-2 text-dark font-medium bg-light border border-2 border-dark" [(ngModel)]="credentials.email" #email="ngModel">
                         </div>
                     </div>
-                    <div class="w-full">
+                    <div class="w-full relative">
                         <label for="password" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Mot de passe</label>
                         <div class="mt-2">
-                            <input type="password" id="password" name="password" placeholder="" class="w-full px-4 py-2 text-dark font-medium bg-light border border-2 border-dark" [(ngModel)]="credentials.password" #password="ngModel">
+                            <input [type]="isPasswordVisible ? 'text' : 'password'" id="password" name="password" placeholder="" class="w-full px-4 py-2 text-dark font-medium bg-light border border-2 border-dark" [(ngModel)]="credentials.password" #password="ngModel">
+                            <button type="button" 
+                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark"
+                                (click)="togglePasswordVisibility()">
+                                <svg *ngIf="!isPasswordVisible" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5c-7.2 0-9.75 7.5-9.75 7.5s2.55 7.5 9.75 7.5 9.75-7.5 9.75-7.5-2.55-7.5-9.75-7.5z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15.75A3.75 3.75 0 1012 8.25a3.75 3.75 0 000 7.5z" />
+                                </svg>
+                                <svg *ngIf="isPasswordVisible" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 3l18 18M15.535 15.535A6.001 6.001 0 0012 9a6.001 6.001 0 00-3.535 1.035M6.343 6.343A9 9 0 0112 3a9 9 0 019 9m-4.243 4.243A9 9 0 0112 21a9 9 0 01-9-9m9-9v0" />
+                                </svg>
+                            </button>
                         </div>
                         <!-- <div class="flex justify-between mt-2">
                             <div class="flex items-center gap-2">

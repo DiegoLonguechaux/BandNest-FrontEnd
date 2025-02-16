@@ -46,7 +46,7 @@
             </div>
 
             <!-- DETAILS -->
-             <div class="flex flex-col lg:flex-row gap-10">
+            <div class="flex flex-col lg:flex-row gap-10">
                  <div class="lg:w-1/2">
                     <label class="text-dark font-first font-bold uppercase border-b-2 border-primary">Surface (m²)</label>
                     <div class="mt-2">
@@ -70,41 +70,64 @@
                         [(ngModel)]="roomDatas.description"></textarea>
                 </div>
             </div>
-        </div>
+            
+            <div class="flex flex-col lg:flex-row gap-10">
 
-        <div class="mt-6">
-            <h2 class="text-dark font-first font-bold uppercase text-lg">Horaires d'ouverture</h2>
-        
-            <div *ngFor="let hour of roomDatas.operating_hours; let i = index" class="flex items-center gap-4 mt-2">
-                <label class="text-dark font-medium w-24">{{ hour.day | titlecase }}</label>
-        
-                <!-- Case à cocher "Fermé" -->
-                <label class="flex items-center gap-2">
-                    <input type="checkbox" [(ngModel)]="hour.closed" (change)="toggleClosed(i)" 
-                           name="closed{{i}}" [ngModelOptions]="{standalone: true}">
-                    <span>Fermé</span>
-                </label>
-        
-                <!-- Champs horaires (désactivés si "Fermé" est coché) -->
-                 <!-- <mat-form-field>
-                    <mat-label>Ouverture</mat-label>
-                    <input [(ngModel)]="hour.start" name="start{{i}}" 
-                           class="px-4 py-2 border border-dark"
-                           [disabled]="hour.closed" [ngModelOptions]="{standalone: true}"
-                           matInput [matTimePicker]="picker">
-                    <mat-timepicker-toggle matIconSuffix [for]="picker"/>
-                    <mat-timepicker #picker/>
-                 </mat-form-field> -->
+                <div class="mt-6 lg:w-1/2">
+                    <p class="text-dark font-first font-bold uppercase border-b-2 border-primary">Horaires d'ouverture</p>
+                    
+                    <div *ngFor="let hour of roomDatas.operating_hours; let i = index" class="flex items-center gap-4 mt-2">
+                        <label class="text-dark font-medium w-24">{{ hour.day | titlecase }}</label>
+                        
+                        <!-- Case à cocher "Fermé" -->
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" [(ngModel)]="hour.closed" (change)="toggleClosed(i)" 
+                            name="closed{{i}}" [ngModelOptions]="{standalone: true}">
+                            <span>Fermé</span>
+                        </label>
+    
+                        <input type="time" [(ngModel)]="hour.start" name="start{{i}}" 
+                        class="px-4 py-2 border border-dark"
+                        [disabled]="hour.closed" [ngModelOptions]="{standalone: true}">
+                        
+                        <span>à</span>
+                        
+                        <input type="time" [(ngModel)]="hour.end" name="end{{i}}" 
+                        class="px-4 py-2 border border-dark"
+                        [disabled]="hour.closed" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                
+                <div class="mt-6 lg:w-1/2">
+                    <p class="text-dark font-first font-bold uppercase border-b-2 border-primary">Matériel de la salle</p>
 
-                 <input type="time" [(ngModel)]="hour.start" name="start{{i}}" 
-                           class="px-4 py-2 border border-dark"
-                           [disabled]="hour.closed" [ngModelOptions]="{standalone: true}">
-        
-                <span>à</span>
-        
-                <input type="time" [(ngModel)]="hour.end" name="end{{i}}" 
-                       class="px-4 py-2 border border-dark"
-                       [disabled]="hour.closed" [ngModelOptions]="{standalone: true}">
+                    <div class="flex items-center gap-2 mb-4">
+                        <input 
+                            type="text" 
+                            [(ngModel)]="newMaterial" 
+                            placeholder="Nom du matériel" 
+                            class="border p-2 rounded w-full"
+                        >
+                        <button 
+                            (click)="addMaterial()" 
+                            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                            Ajouter
+                        </button>
+                    </div>
+                
+                    <!-- Liste des matériels ajoutés -->
+                    <ul class="mb-4">
+                        <li *ngFor="let material of roomDatas.material; let i = index" class="flex justify-between items-center bg-gray-100 p-2 rounded mb-2">
+                            <span>{{ material }}</span>
+                            <button (click)="removeMaterial(i)" class="text-red-500">❌</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <p class="text-dark font-first font-bold uppercase border-b-2 border-primary">Ajouter des photos</p>
+                <input type="file">
             </div>
         </div>
 

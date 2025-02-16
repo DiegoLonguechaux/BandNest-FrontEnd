@@ -1,5 +1,7 @@
+import { MaterialModel } from "./material.model";
+
 export interface OperatingHours {
-    day: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+    day: 'Lundi' | 'Mardi' | 'Mercredi' | 'Jeudi' | 'Vendredi' | 'Samedi' | 'Dimanche';
     start?: string | null; // Peut être `null` si fermé
     end?: string | null;   // Peut être `null` si fermé
     closed: boolean;       // Nouvelle propriété pour savoir si c’est fermé
@@ -15,5 +17,6 @@ export class RoomModel {
     size: number|undefined; 
     price_per_hour : number|undefined;
     description?: string|undefined;
+    material: MaterialModel[] = [];
     operating_hours: OperatingHours[] = [];
 }
