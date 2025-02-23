@@ -1,5 +1,5 @@
 export class MaterialModel {
     id?: number;
-    name?: string;
+    name: string = '';
   }
   

@@ -17,6 +17,6 @@ export class RoomModel {
     size: number|undefined; 
     price_per_hour : number|undefined;
     description?: string|undefined;
-    material: MaterialModel[] = [];
+    equipment: MaterialModel[] = [];
     operating_hours: OperatingHours[] = [];
 }

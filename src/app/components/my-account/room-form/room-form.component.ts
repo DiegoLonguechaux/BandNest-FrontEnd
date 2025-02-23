@@ -22,6 +22,7 @@ export class RoomFormComponent {
   roomId: number | null = null;
   isEditing = signal(false);
   newMaterial: string = '';
+  editingMaterialIndex: number | null = null;
   private readonly weekDays: OperatingHours['day'][] = [
     'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'
   ];
@@ -32,15 +33,14 @@ export class RoomFormComponent {
     address: '',
     size: 0,
     price_per_hour: 0,
-    material: [],
+    equipment: [],
     operating_hours: this.weekDays.map(day => ({
       day,
-      start: null, // Par défaut, pas d'horaires
+      start: null,
       end: null,
-      closed: false  // Par défaut, la salle est fermée
+      closed: false
     }))
   }
-
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
@@ -52,8 +52,8 @@ export class RoomFormComponent {
           this.roomDatas = { ...response.data };
         });
 
-        if (!this.roomDatas.material) {
-          this.roomDatas.material = [];
+        if (!this.roomDatas.equipment ) {
+          this.roomDatas.equipment = [];
         }
 
         if (!this.roomDatas.operating_hours || this.roomDatas.operating_hours.length === 0) {
@@ -70,16 +70,30 @@ export class RoomFormComponent {
 
   addMaterial() {
     if (this.newMaterial.trim()) {
-      const newMat: MaterialModel = { name: this.newMaterial.trim() }; // Créer un objet MaterialModel
-      this.roomDatas.material.push(newMat); // Ajouter l'objet au tableau
+      const newMat: MaterialModel = { name: this.newMaterial.trim() };
+
+      if (this.editingMaterialIndex !== null) {
+        // ✅ Modification d'un matériel existant
+        this.roomDatas.equipment[this.editingMaterialIndex] = newMat;
+        this.editingMaterialIndex = null;
+      } else {
+        // ✅ Ajout d'un nouveau matériel
+        this.roomDatas.equipment = [...this.roomDatas.equipment, newMat]; // ✅ Utilisation du spread operator pour forcer la détection du changement
+      }
+
       this.newMaterial = ''; // Réinitialise l'input
     }
   }
   
+  editMaterial(index: number) {
+    this.newMaterial = this.roomDatas.equipment[index].name;
+    this.editingMaterialIndex = index; // Stocke l'index du matériel en cours de modification
+  }
 
   removeMaterial(index: number) {
-    this.roomDatas.material.splice(index, 1);
+    this.roomDatas.equipment = this.roomDatas.equipment.filter((_, i) => i !== index); // ✅ Mise à jour propre
   }
+
 
   toggleClosed(index: number): void {
     const hour = this.roomDatas.operating_hours[index];

@@ -100,29 +100,36 @@
                 
                 <div class="mt-6 lg:w-1/2">
                     <p class="text-dark font-first font-bold uppercase border-b-2 border-primary">Matériel de la salle</p>
-
+                
                     <div class="flex items-center gap-2 mb-4">
                         <input 
                             type="text" 
                             [(ngModel)]="newMaterial" 
+                            name="newMaterial"
                             placeholder="Nom du matériel" 
                             class="border p-2 rounded w-full"
                         >
                         <button 
+                            type="button"
                             (click)="addMaterial()" 
                             class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                            Ajouter
+                            {{ editingMaterialIndex !== null ? 'Modifier' : 'Ajouter' }}
                         </button>
                     </div>
                 
                     <!-- Liste des matériels ajoutés -->
                     <ul class="mb-4">
-                        <li *ngFor="let material of roomDatas.material; let i = index" class="flex justify-between items-center bg-gray-100 p-2 rounded mb-2">
-                            <span>{{ material }}</span>
-                            <button (click)="removeMaterial(i)" class="text-red-500">❌</button>
+                        <li *ngFor="let material of roomDatas.equipment; let i = index" 
+                            class="flex justify-between items-center bg-gray-100 p-2 rounded mb-2">
+                            <span>{{ material.name }}</span>
+                            <div class="flex gap-2">
+                                <button (click)="editMaterial(i)" class="text-blue-500">✏️</button>
+                                <button (click)="removeMaterial(i)" class="text-red-500">❌</button>
+                            </div>
                         </li>
                     </ul>
                 </div>
+                
             </div>
 
             <div class="mt-6">
