@@ -149,10 +149,10 @@ export class RoomFormComponent {
           if (this.roomDatas.equipment.length > 0) {
             this.roomDatas.equipment.forEach(mat => {
               mat.room_id = createdRoom.id; // Ajoute l'ID de la salle
-              this.materialService.addEquipment([mat]) // Mettre [mat] pour envoyer un tableau
+              this.materialService.addEquipment(mat) // Envoi unitaire
                   .subscribe(() => console.log("Matériel ajouté :", mat),
                       error => console.error("Erreur ajout matériel :", error));
-            });
+          });
         }
 
         // Associer room_id et envoyer les horaires

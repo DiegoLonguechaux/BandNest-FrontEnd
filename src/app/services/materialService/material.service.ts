@@ -12,8 +12,8 @@ export class MaterialService {
 
   constructor() { }
 
-  addEquipment(equipment: MaterialModel[]): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/materials`, { equipment }); // Envoi direct
+  addEquipment(equipment: MaterialModel): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/materials`, equipment); // Envoi direct
   }
   // addEquipment(roomId: number, equipment: MaterialModel[]): Observable<any> {
   //   return this.http.post(`/api/rooms/${roomId}/equipment`, { equipment });
