@@ -12,7 +12,7 @@ export class OperatingHoursService {
 
   constructor() { }
 
-  addOperatingHours(operating_hours: OperatingHoursModel[]): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/operating-hours`, { operating_hours }); // Envoi direct
+  addOperatingHours(operating_hours: OperatingHoursModel): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/operating-hours`, operating_hours); // Envoi direct
   }
 }

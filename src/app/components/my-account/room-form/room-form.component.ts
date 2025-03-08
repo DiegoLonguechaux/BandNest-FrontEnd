@@ -40,7 +40,8 @@ export class RoomFormComponent {
     address: '',
     size: 0,
     price_per_hour: 0,
-    equipment: [],
+    // equipment: [],
+    materials: [],
     structure_id: undefined,
     operating_hours: this.weekDays.map(day => ({
       day,
@@ -70,11 +71,18 @@ export class RoomFormComponent {
 
         this.roomService.getRoomById(this.roomId).subscribe(response => {
           this.roomDatas = { ...response.data };
+          // if (response.data.materials) {
+          //   this.roomDatas.equipment = response.data.materials; // Assigne les équipements récupérés
+          // }
+          console.log(this.roomDatas)
+          if (response.data.materials) {
+            console.log("Matériels récupérés :", response.data.materials); // Debug
+            this.roomDatas.materials = response.data.materials; // ✅ Correction ici
+          } else {
+              this.roomDatas.materials = [];
+          }
         });
 
-        if (!this.roomDatas.equipment ) {
-          this.roomDatas.equipment = [];
-        }
 
         if (!this.roomDatas.operating_hours || this.roomDatas.operating_hours.length === 0) {
           this.roomDatas.operating_hours = this.weekDays.map(day => ({
@@ -94,11 +102,11 @@ export class RoomFormComponent {
 
       if (this.editingMaterialIndex !== null) {
         // Modification d'un matériel existant
-        this.roomDatas.equipment[this.editingMaterialIndex] = newMat;
+        this.roomDatas.materials[this.editingMaterialIndex] = newMat;
         this.editingMaterialIndex = null;
       } else {
         // Ajout d'un nouveau matériel
-        this.roomDatas.equipment = [...this.roomDatas.equipment, newMat]; // Utilisation du spread operator pour forcer la détection du changement
+        this.roomDatas.materials = [...this.roomDatas.materials, newMat]; // Utilisation du spread operator pour forcer la détection du changement
       }
 
       this.newMaterial = ''; // Réinitialise l'input
@@ -106,12 +114,12 @@ export class RoomFormComponent {
   }
   
   editMaterial(index: number) {
-    this.newMaterial = this.roomDatas.equipment[index].name;
+    this.newMaterial = this.roomDatas.materials[index].name;
     this.editingMaterialIndex = index; // Stocke l'index du matériel en cours de modification
   }
 
   removeMaterial(index: number) {
-    this.roomDatas.equipment = this.roomDatas.equipment.filter((_, i) => i !== index); // Mise à jour propre
+    this.roomDatas.materials = this.roomDatas.materials.filter((_, i) => i !== index); // Mise à jour propre
   }
 
 
@@ -145,25 +153,27 @@ export class RoomFormComponent {
         });
       } else {
         this.roomService.createRoom(this.roomDatas).subscribe((createdRoom) => {
+          const roomId = (createdRoom as any)?.data?.id ?? createdRoom.id;
+          console.log("Salle créée :", createdRoom);
           // Associer room_id et envoyer les équipements
-          if (this.roomDatas.equipment.length > 0) {
-            this.roomDatas.equipment.forEach(mat => {
-              mat.room_id = createdRoom.id; // Ajoute l'ID de la salle
+          if (this.roomDatas.materials && this.roomDatas.materials.length > 0) {
+            this.roomDatas.materials.forEach(mat => {
+              mat.room_id = roomId // Ajoute l'ID de la salle
               this.materialService.addEquipment(mat) // Envoi unitaire
                   .subscribe(() => console.log("Matériel ajouté :", mat),
                       error => console.error("Erreur ajout matériel :", error));
-          });
-        }
+            });
+          }
 
-        // Associer room_id et envoyer les horaires
-        if (this.roomDatas.operating_hours.length > 0) {
-          this.roomDatas.operating_hours.forEach(hour => {
-            hour.room_id = createdRoom.id; // Ajout du room_id
-            this.operatingHoursService.addOperatingHours([hour])
-                .subscribe(() => console.log("Horaire ajouté :", hour),
-                    error => console.error("Erreur ajout horaire :", error));
-          });
-        }
+          // Associer room_id et envoyer les horaires
+          if (this.roomDatas.operating_hours.length > 0) {
+            this.roomDatas.operating_hours.forEach(hour => {
+              hour.room_id = roomId; // Ajout du room_id
+              this.operatingHoursService.addOperatingHours(hour)
+                  .subscribe(() => console.log("Horaire ajouté :", hour),
+                      error => console.error("Erreur ajout horaire :", error));
+            });
+          }
           this.router.navigate(['/my-account']);
         });
       }

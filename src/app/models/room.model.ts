@@ -18,7 +18,8 @@ export class RoomModel {
     size: number|undefined; 
     price_per_hour : number|undefined;
     description?: string|undefined;
-    equipment: MaterialModel[] = [];
+    // equipment: MaterialModel[] = [];
+    materials: MaterialModel[] = [];
     operating_hours: OperatingHoursModel[] = [];
     structure_id?: number;
 }
