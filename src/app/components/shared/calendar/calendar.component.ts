@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
-import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
 
 @Component({
   selector: 'app-calendar',
@@ -13,11 +13,16 @@ import interactionPlugin from '@fullcalendar/interaction';
   styleUrl: './calendar.component.css'
 })
 export class CalendarComponent {
-  @Input() events: any[] = []; // Permet d'injecter des événements dynamiques
+  @Input() events: any[] = [];
+  @Output() dateSelected = new EventEmitter<string>();
+
+  showModal: boolean = false;
+  selectedDate: string = '';
+  startTime: string = '';
+  endTime: string = '';
 
   calendarOptions: CalendarOptions = {
     plugins: [timeGridPlugin, interactionPlugin],
-    themeSystem: 'darkly',
     height: 700,
     locale: 'fr',
     firstDay: 1,
@@ -32,6 +37,17 @@ export class CalendarComponent {
       week: 'Semaine',
       day: 'Jour'
     },
-    events: this.events
+    selectable: true,
+    dateClick: (info) => {
+      this.dateSelected.emit(info.dateStr); 
+    }
+    // events: [
+    //   {
+        
+    //   }
+    // ],
+    // eventClick: function() {
+      
+    // }
   };
 }

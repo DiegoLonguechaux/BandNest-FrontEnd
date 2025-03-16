@@ -24,7 +24,7 @@
                 <div class="flex flex-col gap-8 md:w-2/3">
                     <div class="flex gap-8">
                         <p class="mr-3">Surface : {{ room()?.size || '' }}M²</p>
-                        <p class="mr-3">Prix : 10€/H</p>
+                        <p class="mr-3">Prix : {{ room()?.price_per_hour || '' }}€/H</p>
                     </div>
                     <div class="flex flex-col w-2/5">
                         <p class="pb-2">Liste des équipements :</p>
@@ -40,14 +40,7 @@
                         </ul>
                     </div>
                     <div class="flex">
-                        <p>Lorem ipsum dolor sit amet. Ex assumenda consequatur eos laboriosam quidem qui illum voluptas id
-                            assumenda nesciunt aut similique enim sed eligendi sapiente et suscipit quas. Eos soluta voluptatem
-                            At consequatur omnis a ratione voluptatibus et voluptatem rerum.
-                            Sed eligendi dolor et perferendis voluptate ea recusandae numquam ex iure nobis At vitae laborum ad
-                            tempore delectus sit veritatis dolores. Est dolorum debitis et voluptas magni aut adipisci soluta
-                            est inventore velit nam quas error At error odio. Sit molestias sunt in quidem fuga sit animi
-                            tempora vel vero molestiae At voluptatem doloremque sit autem distinctio sit totam voluptatem?
-                        </p>
+                        <p>{{ room()?.description || '' }}</p>
                     </div>
                 </div>
                 <div class="flex flex-col md:w-1/3">
@@ -97,9 +90,51 @@
             </div>
         </div>
         <div class="py-10">
-            <app-calendar class="flex justify-center"></app-calendar>
+            <app-calendar class="flex justify-center" (dateSelected)="openModal($event)"></app-calendar>
         </div>
     </div>
+
+    <mat-dialog-content *ngIf="showModal" class="mat-typography">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-lg font-bold mb-4">Réserver un créneau</h2>
+            <p class="mb-2">Date sélectionnée : <strong>{{ selectedDate }}</strong></p>
+    
+            <label class="block">Heure de début :</label>
+            <input type="time" [(ngModel)]="startTime" class="border p-2 w-full mb-3">
+    
+            <label class="block">Heure de fin :</label>
+            <input type="time" [(ngModel)]="endTime" class="border p-2 w-full mb-3">
+    
+            <!-- <div class="flex justify-between mt-4">
+                <button (click)="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded">Annuler</button>
+                <button (click)="confirmReservation()" class="bg-blue-500 text-white px-4 py-2 rounded">Confirmer</button>
+            </div> -->
+        </div>
+        <mat-dialog-actions>
+            <button (click)="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded">Annuler</button>
+            <button (click)="confirmReservation()" class="bg-blue-500 text-white px-4 py-2 rounded">Confirmer</button>
+            <!-- <button mat-button mat-dialog-close>Cancel</button>
+            <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button> -->
+        </mat-dialog-actions>
+    </mat-dialog-content>
+
+    <!-- <div *ngIf="showModal" class="">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-lg font-bold mb-4">Réserver un créneau</h2>
+            <p class="mb-2">Date sélectionnée : <strong>{{ selectedDate }}</strong></p>
+    
+            <label class="block">Heure de début :</label>
+            <input type="time" [(ngModel)]="startTime" class="border p-2 w-full mb-3">
+    
+            <label class="block">Heure de fin :</label>
+            <input type="time" [(ngModel)]="endTime" class="border p-2 w-full mb-3">
+    
+            <div class="flex justify-between mt-4">
+                <button (click)="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded">Annuler</button>
+                <button (click)="confirmReservation()" class="bg-blue-500 text-white px-4 py-2 rounded">Confirmer</button>
+            </div>
+        </div>
+    </div> -->
 }
 @else {
     <span>Loading...</span>
