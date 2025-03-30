@@ -109,4 +109,19 @@ export class AuthService {
       })
     );
   }
+  
+  getCurrentUser(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/user`, {
+      withCredentials: true,
+      headers: {
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      }
+    }).pipe(
+      catchError((error) => {
+        console.error('Erreur lors de la récupération de l\'utilisateur connecté :', error);
+        return of(null);
+      })
+    );
+  }
 }

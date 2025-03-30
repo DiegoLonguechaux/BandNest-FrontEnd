@@ -90,51 +90,11 @@
             </div>
         </div>
         <div class="py-10">
-            <app-calendar class="flex justify-center" (dateSelected)="openModal($event)"></app-calendar>
+            <app-calendar class="flex justify-center" ></app-calendar>
         </div>
+        <button mat-raised-button color="primary" (click)="openBookingPopup()">Book this room</button>
     </div>
 
-    <mat-dialog-content *ngIf="showModal" class="mat-typography">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h2 class="text-lg font-bold mb-4">Réserver un créneau</h2>
-            <p class="mb-2">Date sélectionnée : <strong>{{ selectedDate }}</strong></p>
-    
-            <label class="block">Heure de début :</label>
-            <input type="time" [(ngModel)]="startTime" class="border p-2 w-full mb-3">
-    
-            <label class="block">Heure de fin :</label>
-            <input type="time" [(ngModel)]="endTime" class="border p-2 w-full mb-3">
-    
-            <!-- <div class="flex justify-between mt-4">
-                <button (click)="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded">Annuler</button>
-                <button (click)="confirmReservation()" class="bg-blue-500 text-white px-4 py-2 rounded">Confirmer</button>
-            </div> -->
-        </div>
-        <mat-dialog-actions>
-            <button (click)="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded">Annuler</button>
-            <button (click)="confirmReservation()" class="bg-blue-500 text-white px-4 py-2 rounded">Confirmer</button>
-            <!-- <button mat-button mat-dialog-close>Cancel</button>
-            <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button> -->
-        </mat-dialog-actions>
-    </mat-dialog-content>
-
-    <!-- <div *ngIf="showModal" class="">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h2 class="text-lg font-bold mb-4">Réserver un créneau</h2>
-            <p class="mb-2">Date sélectionnée : <strong>{{ selectedDate }}</strong></p>
-    
-            <label class="block">Heure de début :</label>
-            <input type="time" [(ngModel)]="startTime" class="border p-2 w-full mb-3">
-    
-            <label class="block">Heure de fin :</label>
-            <input type="time" [(ngModel)]="endTime" class="border p-2 w-full mb-3">
-    
-            <div class="flex justify-between mt-4">
-                <button (click)="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded">Annuler</button>
-                <button (click)="confirmReservation()" class="bg-blue-500 text-white px-4 py-2 rounded">Confirmer</button>
-            </div>
-        </div>
-    </div> -->
 }
 @else {
     <span>Loading...</span>
