@@ -1,18 +1,19 @@
-<div class="h-[calc(100vh-72px)]">
-    <div class="grid grid-cols-1 md:grid-cols-2 h-full">
-        <div class="flex items-end bg-dark px-20 py-10">
-            <div class="flex items-end mb-20">
-                <p class="uppercase text-4xl text-light font-first">Pas encore inscris ? <br> <span class="text-primary">Fais le dès maintenant !</span></p>
+<div class="h-[calc(100vh-60px)]">
+    <div class="grid grid-cols-1 md:grid-cols-2 md:h-full">
+        <div class="flex items-center md:items-end bg-dark px-6 py-8 lgpx-20 lg:py-10">
+            <div class="flex gap-4 md:flex-col md:mb-10 lg:mb-20">
+                <img src="stickers/yo.png" alt="" class="w-24 sm:w-48 md:w-full" style="max-height: 560px; object-fit: contain;">
+                <p class="uppercase flex flex-col justify-end text-xl sm:text-3xl md:text-4xl text-light font-first">Pas encore inscris ? <br> <span class="text-primary">Fais le dès maintenant !</span></p>
             </div>
         </div>
-        <form class="bg-light px-20 py-10 flex flex-col justify-between" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+        <form class="bg-light px-6 py-8 lg:px-20 lg:py-10 flex flex-col justify-between gap-8" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
             <div class="flex flex-col gap-5">
-                <div class="flex justify-center items-center mb-6">
-                    <a href="login" class="bg-light border border-dark border-2 font-first font-bold uppercase text-xl text-dark px-4 py-2">connexion</a>
-                    <a href="register" class="bg-dark border border-dark border-2 font-first font-bold uppercase text-xl text-light px-4 py-2">inscription</a>
+                <div class="flex justify-center items-center md:mb-6">
+                    <a href="login" class="bg-light border border-dark border-2 font-first font-bold uppercase text-lg md:text-xl text-dark px-4 py-2">connexion</a>
+                    <a href="register" class="bg-dark border border-dark border-2 font-first font-bold uppercase text-lg md:text-xl text-light px-4 py-2">inscription</a>
                 </div>
-                <div class="flex flex-col justify-center items-center mt-6 gap-6">
-                    <div class="flex w-full gap-4">
+                <div class="flex flex-col justify-center items-center md:mt-6 gap-6">
+                    <div class="flex flex-col md:flex-row w-full gap-4">
                         <div class="w-full">
                             <label for="firstname" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Prénom</label>
                             <div class="mt-2">

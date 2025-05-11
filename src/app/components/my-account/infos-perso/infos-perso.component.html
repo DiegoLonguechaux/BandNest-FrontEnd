@@ -2,8 +2,8 @@
     @if (user()) {
         <form #userForm="ngForm" (ngSubmit)="saveChanges(userForm)" class="mt-10" action="" novalidate>
             <div class="flex flex-col items-center justify-between gap-4 lg:flex-row py-8">
-                <div class="w-24 h-24 bg-white rounded-full">
-                    <img src="/public/photos/piano.jpg" alt="photo-profile">
+                <div class="w-24 h-24 bg-white rounded-full overflow-hidden">
+                    <img src="/photos/piano.jpg" alt="photo-profile" class="w-full h-full object-cover">
                 </div>
                 <div class="flex gap-4">
                     <button type="submit" class="px-4 py-2 border border-2 border-dark uppercase font-first font-bold"
@@ -17,8 +17,8 @@
                 </div>
             </div>
 
-            <div class="grid gap-10">
-                <div class="flex flex-col lg:flex-row gap-10">
+            <div class="grid gap-8 pb-6 lg:pb-0">
+                <div class="flex flex-col lg:flex-row gap-8">
                     <!-- {{ user()?.name || '' }} -->
                     <div class="lg:w-1/2">
                         <label for="email" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Email</label>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col lg:flex-row gap-10">
+                <div class="flex flex-col lg:flex-row gap-8">
                     <div class="lg:w-1/2">
                         <label for="firstname" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Prénom</label>
                         <div class="mt-2">

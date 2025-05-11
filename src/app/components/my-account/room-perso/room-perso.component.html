@@ -5,6 +5,6 @@
             salle</a>
     </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center pb-6 lg:pb-0">
     <app-room-card *ngFor="let room of rooms()" [room]="room" [isOwnerView]="true"></app-room-card>
 </div>

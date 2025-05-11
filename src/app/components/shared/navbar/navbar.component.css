@@ -1,0 +1,9 @@
+.custom-menu {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 1rem;
+  }
+  
+  .custom-menu .mat-menu-item {
+    color: white;
+  }

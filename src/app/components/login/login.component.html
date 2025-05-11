@@ -1,49 +1,40 @@
-<div class="h-[calc(100vh-72px)]">
-    <div class="grid grid-cols-1 md:grid-cols-2 h-full">
-        <div class="flex items-end bg-dark px-20 py-10">
-            <div class="flex flex-col mb-20">
-                <img src="stickers/yo.png" alt="">
-                <p class="uppercase text-4xl text-light font-first">Connecte toi <br> <span class="text-primary">dès maintenant !</span></p>
+<div class="h-[calc(100vh-60px)]">
+    <div class="grid grid-cols-1 md:grid-cols-2 md:h-full">
+        <div class="flex items-center md:items-end bg-dark px-6 py-8 lg:px-20 lg:py-10">
+            <div class="flex gap-4 md:flex-col md:mb-10 lg:mb-20">
+                <img src="stickers/yo.png" alt="" class="object-contain w-24 sm:w-48 md:w-full">
+                <p class="uppercase flex flex-col justify-end text-xl sm:text-3xl md:text-4xl text-light font-first">Connecte toi <br> <span class="text-primary">dès maintenant !</span></p>
             </div>
         </div>
-        <form class="bg-light px-20 py-10 flex flex-col justify-between" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <form class="bg-light px-6 py-8 lg:px-20 lg:py-10 flex flex-col justify-between gap-8" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
             <div class="flex flex-col gap-5">
-                <div class="flex justify-center items-center mb-6">
-                    <a href="login" class="bg-dark border border-dark border-2 font-first font-bold uppercase text-xl text-light px-4 py-2">connexion</a>
-                    <a href="register" class="bg-light border border-dark border-2 font-first font-bold uppercase text-xl text-dark px-4 py-2">inscription</a>
+                <div class="flex justify-center items-center md:mb-6">
+                    <a href="login" class="bg-dark border border-dark border-2 font-first font-bold uppercase text-lg md:text-xl text-light px-4 py-2">connexion</a>
+                    <a href="register" class="bg-light border border-dark border-2 font-first font-bold uppercase text-lg md:text-xl text-dark px-4 py-2">inscription</a>
                 </div>
-                <div class="flex flex-col justify-center items-center mt-6 gap-10">
+                <div class="flex flex-col justify-center items-center md:mt-6 gap-10">
                     <div class="w-full">
                         <label for="email" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Email</label>
                         <div class="mt-2">
                             <input type="text" id="email" name="email" placeholder="" class="w-full px-4 py-2 text-dark font-medium bg-light border border-2 border-dark" [(ngModel)]="credentials.email" #email="ngModel">
                         </div>
                     </div>
-                    <div class="w-full relative">
+                    <div class="w-full">
                         <label for="password" class="text-dark font-first font-bold uppercase border-b-2 border-primary">Mot de passe</label>
-                        <div class="mt-2">
+                        <div class="mt-2 relative">
                             <input [type]="isPasswordVisible ? 'text' : 'password'" id="password" name="password" placeholder="" class="w-full px-4 py-2 text-dark font-medium bg-light border border-2 border-dark" [(ngModel)]="credentials.password" #password="ngModel">
-                            <button type="button" 
-                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark"
-                                (click)="togglePasswordVisibility()">
-                                <svg *ngIf="!isPasswordVisible" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5c-7.2 0-9.75 7.5-9.75 7.5s2.55 7.5 9.75 7.5 9.75-7.5 9.75-7.5-2.55-7.5-9.75-7.5z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15.75A3.75 3.75 0 1012 8.25a3.75 3.75 0 000 7.5z" />
+                            <button type="button" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-dark" (click)="togglePasswordVisibility()">
+
+                                <svg *ngIf="isPasswordVisible" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1D1D1D">
+                                    <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/>
                                 </svg>
-                                <svg *ngIf="isPasswordVisible" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 3l18 18M15.535 15.535A6.001 6.001 0 0012 9a6.001 6.001 0 00-3.535 1.035M6.343 6.343A9 9 0 0112 3a9 9 0 019 9m-4.243 4.243A9 9 0 0112 21a9 9 0 01-9-9m9-9v0" />
+
+                                <svg *ngIf="!isPasswordVisible" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1D1D1D">
+                                    <path d="m644-428-58-58q9-47-27-88t-93-32l-58-58q17-8 34.5-12t37.5-4q75 0 127.5 52.5T660-500q0 20-4 37.5T644-428Zm128 126-58-56q38-29 67.5-63.5T832-500q-50-101-143.5-160.5T480-720q-29 0-57 4t-55 12l-62-62q41-17 84-25.5t90-8.5q151 0 269 83.5T920-500q-23 59-60.5 109.5T772-302Zm20 246L624-222q-35 11-70.5 16.5T480-200q-151 0-269-83.5T40-500q21-53 53-98.5t73-81.5L56-792l56-56 736 736-56 56ZM222-624q-29 26-53 57t-41 67q50 101 143.5 160.5T480-280q20 0 39-2.5t39-5.5l-36-38q-11 3-21 4.5t-21 1.5q-75 0-127.5-52.5T300-500q0-11 1.5-21t4.5-21l-84-82Zm319 93Zm-151 75Z"/>
                                 </svg>
+                                
                             </button>
                         </div>
-                        <!-- <div class="flex justify-between mt-2">
-                            <div class="flex items-center gap-2">
-                                <input type="checkbox" name="" id="">
-                                <p>Remember me</p>
-                            </div>
-                            <div>
-                                <a href="">Forgot password ?</a>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
