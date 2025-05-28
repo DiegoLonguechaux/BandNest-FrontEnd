@@ -1,10 +1,10 @@
 @if (!isLoading()) {
 
 <form #structureForm="ngForm" (ngSubmit)="saveChanges(structureForm)" class="mt-10" action="" novalidate>
-    <div class="flex flex-col items-center justify-between gap-4 lg:flex-row py-8">
-        <div class="w-24 h-24 bg-white rounded-full">
-            <img src="/bandnest-front/public/photos/piano.jpg" alt="photo-profile">
-        </div>
+    <div class="flex flex-col items-center justify-end gap-4 lg:flex-row py-8">
+        <!-- <div class="w-24 h-24 bg-white rounded-full">
+            <img src="/photos/piano.jpg" alt="photo-profile">
+        </div> -->
         <div class="flex gap-4">
             <button type="submit" class="px-4 py-2 border border-2 border-dark uppercase font-first font-bold"
                 [disabled]="!isEditing()" *ngIf="isEditing()">Sauvegarder</button>

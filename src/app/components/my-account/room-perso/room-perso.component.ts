@@ -1,10 +1,10 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { RoomCardComponent } from '../../shared/room-card/room-card.component';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../../../services/userService/user.service';
-import { StructureService } from '../../../services/structureService/structure.service';
-import { RoomModel } from '../../../models/room.model';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { RoomModel } from '../../../models/room.model';
+import { StructureService } from '../../../services/structureService/structure.service';
+import { UserService } from '../../../services/userService/user.service';
+import { RoomCardComponent } from '../../shared/room-card/room-card.component';
 
 @Component({
   selector: 'app-room-perso',
@@ -25,7 +25,7 @@ export class RoomPersoComponent {
       if (userResponse?.data?.structures?.length!) {
         const structureId = userResponse.data.structures[0].id!;
 
-        // 🔥 Récupération des salles de la structure
+        // Récupération des salles de la structure
         this.structureService.getRoomsStructure(structureId).subscribe((roomsResponse) => {
           this.rooms.set(roomsResponse);
         });
