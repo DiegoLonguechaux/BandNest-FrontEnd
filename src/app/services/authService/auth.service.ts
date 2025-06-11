@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, Observable, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -44,7 +44,7 @@ export class AuthService {
           catchError((error) => {
             console.error('Erreur lors de la connexion :', error);
             this.isLoggedInSubject.next(false);
-            return of(null);
+            return throwError(() => error);
           })
         );
       })

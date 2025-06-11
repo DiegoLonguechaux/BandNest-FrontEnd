@@ -14,7 +14,7 @@ module.exports = {
       },
       fontFamily: {
         first: ['Archivo Black', 'sans-serif'],
-        second: ['Roboto', 'sans-serif'],
+        second: ['Maven Pro', 'sans-serif'],
       },
     },
   },
